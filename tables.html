@@ -24,7 +24,7 @@
     
                 <div class="row">
                 <div class="card">
-                        <div class="card-header">
+                        <div id="currentres" class="card-header">
                           Current Reservations
                         </div>
                         <div class="card-body">
@@ -39,7 +39,7 @@
 
                     <div class="row">
                             <div class="card">
-                                    <div class="card-header">
+                                    <div id="waitlist" class="card-header">
                                       Waiting List
                                     </div>
                                     <div class="card-body">
@@ -63,5 +63,35 @@
     
     
             </div>
+            <script type="text/javascript">
+            $.get("/api/tables", function(data) {
+            for (var i = 0; i < data.length; i++) {
+            console.log(data[i]);
+            var listGroupItem = $("<li class='list-group-item'>");
+
+            listGroupItem.append($("<h3>").text("ID: " + data[i].id));
+            listGroupItem.append($("<h2>").text("Name: " + data[i].name));
+            listGroupItem.append($("<h3>").text("Phone: " + data[i].phone));
+            listGroupItem.append($("<h3>").text("Email: " + data[i].email));
+            
+            $("#currentres").append(listGroupItem);
+              }
+                });
+            
+            $.get("/api/tables", function(data) {
+            for (var i = 0; i < data.length; i++) {
+            console.log(data[i]);
+            var listGroupItem = $("<li class='list-group-item'>");
+
+            listGroupItem.append($("<h3>").text("ID: " + data[i].id));
+            listGroupItem.append($("<h2>").text("Name: " + data[i].name));
+            listGroupItem.append($("<h3>").text("Phone: " + data[i].phone));
+            listGroupItem.append($("<h3>").text("Email: " + data[i].email));
+            
+            $("#waitlist").append(listGroupItem);
+              }
+            });
+                
+            </script>
     </body>
     </html>
