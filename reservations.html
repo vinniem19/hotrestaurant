@@ -39,5 +39,28 @@
     
     
             </div>
-    </body>
+            <script type="text/javascript">
+              $("#submit").on("click", function(event) {
+                event.preventDefault();
+          
+                var newcustomer = {
+                  name: $("#res-name").val().trim(),
+                  email: $("#res-email").val().trim(),
+                  phone: $("#res-phone").val().trim(),
+                  id: $("#res-id").val().trim()
+                };
+          
+              if (tables.length <= 4) {
+                  $.post("/api/tables", function(req, res) {
+                  tables.push(newcustomer);
+                  // JQuery to update page dynamically
+                  });
+                  } else {
+                  $.post("/api/waitinglist", function(req, res) {
+                  waitingList.push(newcustomer);
+                  });
+                };
+              });
+          </script>
+          </body>
     </html>
